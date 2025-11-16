@@ -7,6 +7,7 @@ const PORT = 8000;
 app.use(express.json());               
 app.use(express.urlencoded({ extended: true }));
 
+
 mongoose.connect('mongodb://localhost:27017/short-URL').then(()=>{
     console.log('mongodb connected')
 }).catch(()=>{
@@ -25,4 +26,5 @@ app.get('/:shortid',async (req,res)=>{
     })
     res.redirect(link.redirectedURL);
 })
+
 app.listen(PORT, ()=>{console.log(`Server listening at port ${PORT}`)})
