@@ -3,7 +3,7 @@ import URL from '../models/user.js'
 
 async function handleGenerateNewShortURL(req,res){
 const body = req.body;
-if(!body){
+if(!body || !body.url){
     return res.status(400).json({error:'No URL Entered'})
 }
 const shortID = nanoid(8);
@@ -15,8 +15,8 @@ const newuser = await URL.create(
     }
 );
 console.log(newuser);
-return res.json({
-    id:`${shortID}`
+return res.render('home',{
+    id:shortID
 })
 }
 
