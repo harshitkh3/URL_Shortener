@@ -16,5 +16,4 @@ visitHistory:[
     }
 ],
 },{timestamps:true})
-
 export default mongoose.model('URL',URLSchema)
