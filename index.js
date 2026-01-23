@@ -30,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/short-URL').then(()=>{
     console.log('error in mongodb')
 })
 
-app.get('/find/:shortid',async (req,res)=>{
+app.get('/:shortid',async (req,res)=>{
     const shortID = req.params.shortid;
     const link=await URL.findOneAndUpdate({shortID},{
         $push:{
