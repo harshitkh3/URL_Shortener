@@ -12,14 +12,14 @@ import { restrictToLoggedInUserOnly, checkAuth } from './middlewares/auth.js';
 const app = express();
 const PORT = 8000;
 
-// ✅ Middleware FIRST
+// Middleware
 app.use(express.json());               
 app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser())
 app.set('view engine','ejs')
 app.set("views",path.resolve("./views"));
 
-// ✅ Routes AFTER middleware
+// Routes
 app.use('/url', router);
 app.use('/user', userRoute)
 app.use("/", staticRoute);
