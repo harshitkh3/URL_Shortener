@@ -2,15 +2,20 @@ import { nanoid } from 'nanoid'
 import URL from '../models/user.js'
 
 async function handleGenerateNewShortURL(req,res){
+
 const body = req.body;
+const user = req.user;
+console.log(user.name);
 if(!body || !body.url){
-    return res.status(400).json({error:'No URL Entered'})
+    return res.render('home',{error:'No URL Entered'})
 }
 const shortID = nanoid(8);
 const newuser = await URL.create(
     {
         shortID:shortID,
         redirectedURL:body.url,
+        createdBy:user.email,
+        username:user.name,
         visitHistory:[],
     }
 );
@@ -32,7 +37,8 @@ async function handleAnalytics(req,res){
 }
 
 async function handlegetalldata(req,res){
-    const alldata = await URL.find({});
+    const user = req.user;
+    const alldata = await URL.find({username: user.email});
     let ans=[];
 alldata.map(url=>{
     console.log(`the link ${url.redirectedURL} has shortid ${url.shortID}`)

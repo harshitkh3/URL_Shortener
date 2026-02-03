@@ -32,6 +32,9 @@ mongoose.connect('mongodb://localhost:27017/short-URL').then(()=>{
 
 app.get('/:shortid',async (req,res)=>{
     const shortID = req.params.shortid;
+    if(!shortID){
+        return 
+    }
     const link=await URL.findOneAndUpdate({shortID},{
         $push:{
             visitHistory:{
@@ -39,6 +42,9 @@ app.get('/:shortid',async (req,res)=>{
             }
         }
     })
+     if(!link){
+        return res.status(404).json({ error: 'Short URL not found' });
+    }
     res.redirect(link.redirectedURL);
 })
 

@@ -21,6 +21,7 @@
         <% if (locals.id) { %>
             <p>URL Generated <a href="http://localhost:8000/<%= id %>" target="_blank">http://localhost:8000/<%= id %>
                         </a></p>
+                        <a href="/"><button>Go to Home</button></a>
             <% } %>
     </h3>
     <div>
@@ -30,8 +31,13 @@
             <button type="submit">Generate</button>
         </form>
     </div>
+    <div class="error">
+        <% if (locals.error) { %>
+         <h3 style="color: red;">Enter a valid URL</h3>
+        <% } %>
+    </div>
     <div>
-        <% if (locals.urls) { %>
+        <% if (locals.urls && locals.user) { %>
             <table>
                 <thead>
                     <th>S. No.</th>

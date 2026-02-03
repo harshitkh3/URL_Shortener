@@ -10,6 +10,14 @@ redirectedURL:{
     type:String,
     required:true,
 },
+createdBy:{
+    type:String,
+required:true,
+},
+username:{
+    type:String,
+    required:true,
+},
 visitHistory:[
     {
         timestamp:{type:Number}
